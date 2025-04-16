@@ -57,9 +57,9 @@ class MainActivity : AppCompatActivity() {
 
     fun startButton() {
         if (timerBinder?.isRunning == false) //if timer is not running
-            timerBinder?.start(TimerService.DEFAULT_VALUE) //starts timer
+            timerBinder?.start() //starts timer
         else {
-            timerBinder?.pause()
+            timerBinder?.pause() //pauses timer
         }
     }
 

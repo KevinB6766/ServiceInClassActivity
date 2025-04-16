@@ -39,12 +39,11 @@ class TimerService : Service() {
             get() = this@TimerService.paused
 
         // Start a new timer
-        fun start(startValue: Int){
-
+        fun start() {
             if (!paused) {
                 if (!isRunning) {
                     if (::t.isInitialized) t.interrupt()
-                    this@TimerService.start(startValue)
+                    this@TimerService.start(savedValue)
                 }
             } else {
                 pause()
@@ -75,7 +74,6 @@ class TimerService : Service() {
         Log.d("TimerService status", "Created")
         sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE) //shared preferences
         savedValue = sharedPreferences.getInt(COUNTDOWN_KEY, DEFAULT_VALUE) //saved value
-
         Log.d("TimerService status", "Created")
     }
 
@@ -83,9 +81,9 @@ class TimerService : Service() {
         return TimerBinder()
     }
 
-    fun start(startValue: Int) {
-        t = TimerThread(startValue)
-        t.start()
+    fun start(startValue: Int) { //starts timer
+        t = TimerThread(startValue) //timer thread
+        t.start() //starts timer thread
     }
 
     fun pause () {
@@ -146,6 +144,4 @@ class TimerService : Service() {
             apply() //saves value
         }
     }
-
-
 }
