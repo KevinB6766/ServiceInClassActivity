@@ -57,7 +57,10 @@ class MainActivity : AppCompatActivity() {
 
     fun startButton() {
         if (timerBinder?.isRunning == false) //if timer is not running
-            timerBinder?.start(10) //starts timer
+            timerBinder?.start(TimerService.DEFAULT_VALUE) //starts timer
+        else {
+            timerBinder?.pause()
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
